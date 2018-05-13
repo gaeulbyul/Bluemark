@@ -84,7 +84,7 @@ function showError (message) {
   }))
 }
 
-function closeDropdownMenu (dropdownMenu) {
+function closeDropdownMenu () {
   document.dispatchEvent(new CustomEvent('$$uiCloseDropdowns'))
 }
 
@@ -107,7 +107,6 @@ function makeMenuItem (options, clickCallback) {
 
 function insertBookmarkMenu (tweet) {
   const tweetId = tweet.getAttribute('data-tweet-id')
-  const userName = tweet.getAttribute('data-screen-name')
   const userNickName = tweet.getAttribute('data-name')
   const dropdownMenu = tweet.querySelector('.dropdown-menu')
   const addBookmarkMenuItem = makeMenuItem({
@@ -115,7 +114,7 @@ function insertBookmarkMenu (tweet) {
     text: '트윗을 북마크에 넣기'
   }, event => {
     event.preventDefault()
-    closeDropdownMenu(dropdownMenu)
+    closeDropdownMenu()
     addToBookmark(tweetId).then(result => {
       tweet.classList.add('bluemark-added')
       if (result) {
@@ -132,7 +131,7 @@ function insertBookmarkMenu (tweet) {
     text: '트윗을 북마크에서 빼기'
   }, event => {
     event.preventDefault()
-    closeDropdownMenu(dropdownMenu)
+    closeDropdownMenu()
     removeFromBookmark(tweetId).then(result => {
       tweet.classList.remove('bluemark-added')
       if (result) {

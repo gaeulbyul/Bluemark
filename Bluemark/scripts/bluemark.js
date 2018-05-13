@@ -201,6 +201,10 @@ function addBookmarkListMenu () {
 }
 
 function main () {
+  const loggedOut = document.body.classList.contains('logged-out')
+  if (loggedOut) {
+    return
+  }
   const script = document.createElement('script')
   script.src = browser.runtime.getURL('scripts/ui-event-handler.js')
   const appendTarget = (document.head || document.documentElement)

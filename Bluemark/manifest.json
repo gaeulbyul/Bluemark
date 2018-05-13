@@ -1,0 +1,36 @@
+{
+  "description": "PC용 트위터 웹에서 트윗을 북마크에 추가할 수 있게 해주는 확장기능",
+  "manifest_version": 2,
+  "name": "Bluemark",
+  "author": "Gaeulbyul <aeiou256@gmail.com>",
+  "version": "0.1.0",
+  "homepage_url": "https://github.com/gaeulbyul/Bluemark",
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "permissions": [
+    "https://mobile.twitter.com/*",
+    "https://api.twitter.com/*",
+    "https://twitter.com/*"
+  ],
+
+  "web_accessible_resources": [
+    "scripts/ui-event-handler.js"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["*://twitter.com/*"],
+      "css": [
+        "styles/bluemark.css"
+      ],
+      "js": [
+        "vendor/browser-polyfill.min.js",
+        "scripts/bluemark.js"
+      ]
+    }
+  ]
+
+}

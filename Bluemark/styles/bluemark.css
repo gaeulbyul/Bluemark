@@ -1,0 +1,6 @@
+/* 북마크에 추가하지 않은 트윗의 "제거메뉴" */
+.tweet:not(.bluemark-added) .bluemark-menu.bluemark-remove-bookmark,
+/* 북마크에 추가한 트윗의 "추가메뉴" */
+.tweet.bluemark-added .bluemark-menu.bluemark-add-bookmark {
+  display: none !important;
+}

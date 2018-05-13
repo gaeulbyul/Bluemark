@@ -72,15 +72,30 @@ async function removeFromBookmark (tweetId) {
   return true
 }
 
+/*
+* 파이어폭스에선 event.detail을 그냥 넘기면 Permission denied 오류가 발생한다.
+* 따라서, 파이어폭스에 존재하는 cloneInto함수로 detail을 복제해서 넘겨줘야 한다.
+* 참고: https://stackoverflow.com/a/46081249
+* 참고: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Firing_from_privileged_code_to_non-privileged_code
+*/
+function cloneDetail (detail) {
+  /* globals cloneInto */
+  if (typeof cloneInto === 'function') {
+    return cloneInto(detail, document.defaultView)
+  } else {
+    return detail
+  }
+}
+
 function showMessage (message) {
   document.dispatchEvent(new CustomEvent('$$uiShowMessage', {
-    detail: { message }
+    detail: cloneDetail({ message })
   }))
 }
 
 function showError (message) {
   document.dispatchEvent(new CustomEvent('$$uiShowError', {
-    detail: { message }
+    detail: cloneDetail({ message })
   }))
 }
 

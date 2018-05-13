@@ -1,7 +1,7 @@
 {
   "name": "bluemark",
   "version": "0.0.0-see-manifest-json",
-  "description": "PC용 트위터 웹에서 트윗을 북마크에 추가할 수 있게 해주는 확장기능",
+  "description": "모바일 트위터의 북마크기능을 PC용 트위터웹에서도 사용할 수 있게 해 주는 확장기능",
   "main": "Bluemark/manifest.json",
   "repository": "https://github.com/gaeulbyul/Bluemark",
   "author": "Gaeulbyul <aeiou256@gmail.com>",

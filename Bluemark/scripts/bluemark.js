@@ -185,6 +185,12 @@ function applyToRendered () {
 }
 
 function addBookmarkListMenu () {
+  const listmenu = document.querySelector('#user-dropdown li[data-name=lists]')
+  if (!listmenu) {
+    // 사용자메뉴가 없으면 북마크 메뉴를 추가하지 않는다.
+    // (예: 로그인하지 않은 경우)
+    return
+  }
   const menuItem = document.createElement('li')
   menuItem.setAttribute('data-name', 'bluemark-bookmarks')
   menuItem.setAttribute('role', 'presentation')
@@ -197,7 +203,6 @@ function addBookmarkListMenu () {
     <span class="DashUserDropdown-linkIcon Icon Icon--medium Icon--bookmark"></span>북마크 [모바일]
   `
   menuItem.appendChild(link)
-  const listmenu = document.querySelector('#user-dropdown li[data-name=lists]')
   listmenu.after(menuItem)
 }
 

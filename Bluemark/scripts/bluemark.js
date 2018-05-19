@@ -165,8 +165,9 @@ function insertBookmarkMenu (tweet) {
     return
   }
   // 비공개계정의 경우 "트윗 담아가기"(li.embed-link) 메뉴항목이 없다.
-  dropdownMenu.insertBefore(addBookmarkMenuItem, dropdownMenu.firstChild)
-  dropdownMenu.insertBefore(removeBookmarkMenuItem, dropdownMenu.firstChild)
+  const ul = dropdownMenu.querySelector('ul')
+  ul.insertBefore(addBookmarkMenuItem, ul.firstChild)
+  ul.insertBefore(removeBookmarkMenuItem, ul.firstChild)
 }
 
 function applyToRendered () {

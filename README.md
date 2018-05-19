@@ -15,8 +15,8 @@ Bluemark는 모바일 트위터에서의 북마크 기능을 PC용 웹에서도 
 
 [WebExtensions](https://developer.mozilla.org/ko/Add-ons/WebExtensions) 기반으로 작성한 부가기능으로, 다음 브라우저를 지원합니다.
 
-- Firefox
-- Chrome 및 Chromium기반 브라우저(Whale, Vivaldi, Opera 등)
+- Firefox - https://addons.mozilla.org/ko/firefox/addon/bluemark/
+- Chrome 및 Chromium기반 브라우저(Whale, Vivaldi, Opera 등) - https://chrome.google.com/webstore/detail/bluemark/llajadlacilihpllpjpepoahmlclfeff
 
 ## 라이센스
 

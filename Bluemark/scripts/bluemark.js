@@ -1,4 +1,13 @@
-/* globals browser, CustomEvent, MutationObserver, fetch, Headers, URLSearchParams, location */
+/* globals
+  CustomEvent,
+  Headers,
+  MutationObserver,
+  URLSearchParams,
+  browser,
+  cloneInto,
+  fetch,
+  location,
+*/
 'use strict'
 
 // 모바일 트위터웹의 main.{hash}.js에 하드코딩되어있는 값
@@ -78,29 +87,24 @@ async function removeFromBookmark (tweetId) {
 * 참고: https://stackoverflow.com/a/46081249
 * 참고: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Firing_from_privileged_code_to_non-privileged_code
 */
-function cloneDetail (detail) {
-  /* globals cloneInto */
-  if (typeof cloneInto === 'function') {
-    return cloneInto(detail, document.defaultView)
-  } else {
-    return detail
+function triggerCustomEvent (target, name, detail_ = null) {
+  let detail = detail_
+  if (typeof cloneInto === 'function' && detail != null) {
+    detail = cloneInto(detail, document.defaultView)
   }
+  target.dispatchEvent(new CustomEvent(name, { detail }))
 }
 
 function showMessage (message) {
-  document.dispatchEvent(new CustomEvent('$$uiShowMessage', {
-    detail: cloneDetail({ message })
-  }))
+  triggerCustomEvent(document, '$$uiShowMessage', { message })
 }
 
 function showError (message) {
-  document.dispatchEvent(new CustomEvent('$$uiShowError', {
-    detail: cloneDetail({ message })
-  }))
+  triggerCustomEvent(document, '$$uiShowError', { message })
 }
 
 function closeDropdownMenu () {
-  document.dispatchEvent(new CustomEvent('$$uiCloseDropdowns'))
+  triggerCustomEvent(document, '$$uiCloseDropdowns')
 }
 
 function makeMenuItem (options, clickCallback) {
@@ -113,6 +117,9 @@ function makeMenuItem (options, clickCallback) {
   button.setAttribute('type', 'button')
   button.setAttribute('role', 'menuitem')
   button.textContent = text
+  button.addEventListener('click', event => {
+    closeDropdownMenu()
+  })
   button.addEventListener('click', event => {
     clickCallback(event)
   })
@@ -129,7 +136,6 @@ function insertBookmarkMenu (tweet) {
     text: '트윗을 북마크에 넣기'
   }, event => {
     event.preventDefault()
-    closeDropdownMenu()
     addToBookmark(tweetId).then(result => {
       tweet.classList.add('bluemark-added')
       if (result) {
@@ -146,7 +152,6 @@ function insertBookmarkMenu (tweet) {
     text: '트윗을 북마크에서 빼기'
   }, event => {
     event.preventDefault()
-    closeDropdownMenu()
     removeFromBookmark(tweetId).then(result => {
       tweet.classList.remove('bluemark-added')
       if (result) {
@@ -211,6 +216,11 @@ function main () {
   if (loggedOut) {
     return
   }
+  /*
+  * 확장기능 content_script로는 페이지 내에서 정의한 함수/변수를 사용할 수 없고,
+  * jQuery로 정의한 이벤트는 DOM dispatchEvent로 trigger할 수도 없다.
+  * 따라서, jQuery에 접근할 수 있는 별도의 스크립트를 만들어 이벤트를 처리하도록 한다.
+  */
   const script = document.createElement('script')
   script.src = browser.runtime.getURL('scripts/ui-event-handler.js')
   const appendTarget = (document.head || document.documentElement)

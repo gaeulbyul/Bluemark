@@ -1,5 +1,5 @@
 {
-  "description": "모바일 트위터의 북마크기능을 PC용 트위터웹에서도 사용할 수 있게 해 주는 확장기능",
+  "description": "모바일 트위터의 북마크기능을 PC용 트위터웹 및 트윗덱에서도 사용할 수 있게 해 주는 확장기능",
   "manifest_version": 2,
   "name": "Bluemark",
   "author": "Gaeulbyul <aeiou256@gmail.com>",
@@ -17,7 +17,8 @@
   ],
 
   "web_accessible_resources": [
-    "scripts/ui-event-handler.js"
+    "scripts/ui-event-handler.js",
+    "scripts/ui-event-handler-td.js"
   ],
 
   "content_scripts": [
@@ -28,7 +29,18 @@
       ],
       "js": [
         "vendor/browser-polyfill.min.js",
+        "scripts/bookmark-api.js",
+        "scripts/ui-event-sender.js",
         "scripts/bluemark.js"
+      ]
+    },
+    {
+      "matches": ["*://tweetdeck.twitter.com/"],
+      "js": [
+        "vendor/browser-polyfill.min.js",
+        "scripts/bookmark-api.js",
+        "scripts/ui-event-sender.js",
+        "scripts/bluemark-td.js"
       ]
     }
   ]

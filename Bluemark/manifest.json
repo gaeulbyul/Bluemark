@@ -18,7 +18,8 @@
 
   "web_accessible_resources": [
     "scripts/ui-event-handler.js",
-    "scripts/ui-event-handler-td.js"
+    "scripts/ui-event-handler-td.js",
+    "vendor/moduleraid.js"
   ],
 
   "content_scripts": [

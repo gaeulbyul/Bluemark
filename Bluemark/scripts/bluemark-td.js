@@ -64,6 +64,7 @@ function insertBookmarkMenu (tweet) {
   // DM 등에선 whoQuote가 없다.
   if (whoQuote) {
     whoQuote.parentElement.before(insertMe)
+    return
   }
 }
 
@@ -114,6 +115,7 @@ function handleMenuEvent () {
 }
 
 function main () {
+  injectScript('vendor/moduleraid.js')
   injectScript('scripts/ui-event-handler-td.js')
 
   const observer = new MutationObserver(mutations => {

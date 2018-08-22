@@ -132,6 +132,11 @@ function main () {
   if (loggedOut) {
     return
   }
+  // 모바일 페이지엔 이미 북마크 기능이 있다.
+  const mobilePage = document.getElementById('react-root')
+  if (mobilePage) {
+    return
+  }
 
   injectScript('scripts/ui-event-handler.js')
 

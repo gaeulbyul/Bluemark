@@ -139,8 +139,8 @@ function main () {
         }
         // 자기 자신의 트윗은 data-tweet-id 속성이 없다.
         const tweet2 = node.closest('[data-key]')
-        const key = tweet2.getAttribute('data-key')
-        if (/^\d+$/.test(key)) {
+        const key = tweet2 ? tweet2.getAttribute('data-key') : null
+        if (key && /^\d+$/.test(key)) {
           insertBookmarkMenu(tweet2)
         }
       }

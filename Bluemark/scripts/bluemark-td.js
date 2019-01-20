@@ -115,9 +115,6 @@ function handleMenuEvent () {
 }
 
 function main () {
-  injectScript('vendor/moduleraid.js')
-  injectScript('scripts/ui-event-handler-td.js')
-
   const observer = new MutationObserver(mutations => {
     for (const mutation of mutations) {
       for (const node of mutation.addedNodes) {

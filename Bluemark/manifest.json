@@ -18,8 +18,7 @@
 
   "web_accessible_resources": [
     "scripts/ui-event-handler.js",
-    "scripts/ui-event-handler-td.js",
-    "vendor/moduleraid.js"
+    "styles/toaster.css"
   ],
 
   "content_scripts": [
@@ -41,6 +40,7 @@
         "vendor/browser-polyfill.min.js",
         "scripts/bookmark-api.js",
         "scripts/ui-event-sender.js",
+        "scripts/toaster.js",
         "scripts/bluemark-td.js"
       ]
     }
